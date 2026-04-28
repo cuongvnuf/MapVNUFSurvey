@@ -1,4 +1,4 @@
-# Ground for Android
+# MapVNUF for Android
 
 [![CI](https://github.com/google/ground-android/actions/workflows/ci.yml/badge.svg)](https://github.com/google/ground-android/actions/workflows/ci.yml)
 [![codecov.io](https://codecov.io/github/google/ground-android/branch/master/graph/badge.svg)](https://codecov.io/github/google/ground-android)
