@@ -1,0 +1,160 @@
+/*
+ * Copyright 2020 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.groundplatform.android.ui.datacollection.tasks
+
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
+import org.groundplatform.android.R
+import org.groundplatform.android.ui.common.AbstractViewModel
+import org.groundplatform.android.ui.datacollection.components.ButtonAction
+import org.groundplatform.android.ui.datacollection.components.ButtonActionState
+import org.groundplatform.domain.model.job.Job
+import org.groundplatform.domain.model.submission.SkippedTaskData
+import org.groundplatform.domain.model.submission.TaskData
+import org.groundplatform.domain.model.submission.isNotNullOrEmpty
+import org.groundplatform.domain.model.submission.isNullOrEmpty
+import org.groundplatform.domain.model.task.Task
+
+/** Defines the state of an inflated [Task] and controls its UI. */
+abstract class AbstractTaskViewModel internal constructor() : AbstractViewModel() {
+
+  /** Current value. */
+  private val _taskDataFlow: MutableStateFlow<TaskData?> = MutableStateFlow(null)
+  val taskTaskData: StateFlow<TaskData?> = _taskDataFlow.asStateFlow()
+
+  val showInstructionsDialog = mutableStateOf(false)
+
+  open val taskActionButtonStates: StateFlow<List<ButtonActionState>> by lazy {
+    taskTaskData
+      .map { getButtonStates(it) }
+      .distinctUntilChanged()
+      .stateIn(viewModelScope, WhileSubscribed(5_000), emptyList())
+  }
+
+  lateinit var surveyId: String
+  lateinit var task: Task
+  private lateinit var taskPositionInterface: TaskPositionInterface
+
+  open fun initialize(
+    job: Job,
+    task: Task,
+    taskData: TaskData?,
+    taskPositionInterface: TaskPositionInterface,
+    surveyId: String,
+  ) {
+    this.surveyId = surveyId
+    this.task = task
+    this.taskPositionInterface = taskPositionInterface
+    setValue(taskData)
+  }
+
+  /**
+   * Returns the list of button states for the given task data.
+   *
+   * By default it returns a list of [ButtonAction.PREVIOUS], [ButtonAction.SKIP] (if applicable),
+   * [ButtonAction.NEXT]/[ButtonAction.DONE]. Override this method to customize button
+   * configuration.
+   */
+  protected open fun getButtonStates(taskData: TaskData?): List<ButtonActionState> =
+    listOf(getPreviousButton(), getSkipButton(taskData), getNextButton(taskData))
+
+  /** Checks if the current value is valid and updates error value. */
+  fun validate(): Int? = validate(task, taskTaskData.value)
+
+  /**
+   * Performs input validation on the given [Task] and associated [TaskData].
+   *
+   * Returns an [Int] identifier for an error string if validation fails, returns null otherwise.
+   * Subclasses may override this method to validate input data and display an error message to the
+   * user.
+   */
+  open fun validate(task: Task, taskData: TaskData?): Int? {
+    // Empty response for a required task.
+    if (task.isRequired && (taskData == null || taskData.isEmpty())) {
+      return R.string.required_task
+    }
+    return null
+  }
+
+  fun setSkipped() {
+    setValue(SkippedTaskData())
+  }
+
+  fun setValue(taskData: TaskData?) {
+    _taskDataFlow.update { taskData }
+  }
+
+  open fun clearResponse() {
+    setValue(null)
+  }
+
+  fun isTaskOptional(): Boolean = !task.isRequired
+
+  fun hasNoData(): Boolean = taskTaskData.value.isNullOrEmpty()
+
+  fun getPreviousButton(): ButtonActionState =
+    ButtonActionState(
+      action = ButtonAction.PREVIOUS,
+      isEnabled = !taskPositionInterface.isFirst(),
+      isVisible = true,
+    )
+
+  fun getNextButton(
+    taskData: TaskData?,
+    hideIfEmpty: Boolean = false,
+    isEnabled: Boolean = taskData.isNotNullOrEmpty(),
+  ): ButtonActionState {
+    val isVisible = if (hideIfEmpty) taskData.isNotNullOrEmpty() else true
+    return if (taskPositionInterface.isLastWithValue(taskData)) {
+      ButtonActionState(action = ButtonAction.DONE, isEnabled = isEnabled, isVisible = isVisible)
+    } else {
+      ButtonActionState(action = ButtonAction.NEXT, isEnabled = isEnabled, isVisible = isVisible)
+    }
+  }
+
+  fun getSkipButton(taskData: TaskData?): ButtonActionState =
+    ButtonActionState(
+      action = ButtonAction.SKIP,
+      isEnabled = isTaskOptional(),
+      isVisible = isTaskOptional() && taskData.isNullOrEmpty(),
+    )
+
+  fun getUndoButton(
+    taskData: TaskData?,
+    isVisible: Boolean = taskData.isNotNullOrEmpty(),
+  ): ButtonActionState =
+    ButtonActionState(
+      action = ButtonAction.UNDO,
+      isEnabled = taskData.isNotNullOrEmpty(),
+      isVisible = isVisible,
+    )
+
+  open fun onButtonClick(action: ButtonAction) {
+    if (action == ButtonAction.UNDO) {
+      clearResponse()
+    } else {
+      // Subclasses handle other actions
+    }
+  }
+}

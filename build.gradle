@@ -1,0 +1,114 @@
+/*
+ * Copyright 2018 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Top-level build file. Configuration specified here is inherited by all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        mavenLocal()
+        maven { url = "https://maven.google.com" }
+        maven { url = "https://plugins.gradle.org/m2/" }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath libs.androidx.navigation.safe.args.gradle.plugin
+        classpath libs.gradle
+        classpath libs.google.services
+
+        // Performance Monitoring plugin: https://firebase.google.com/docs/perf-mon
+        classpath libs.perf.plugin
+
+        // Crashlytics plugin
+        classpath libs.firebase.crashlytics.gradle
+
+        // Kotlin
+        classpath libs.kotlin.gradle.plugin
+        classpath libs.kotlin.serialization
+
+        // OSS Licenses Plugin
+        classpath libs.oss.licenses.plugin
+
+        // To fetch Maps API key from secrets.properties.
+        classpath libs.secrets.gradle.plugin
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+plugins {
+    alias libs.plugins.kotlin.android apply false
+    alias libs.plugins.kotlin.serialization apply false
+    alias libs.plugins.compose.compiler apply false
+    alias libs.plugins.ksp apply false
+    alias libs.plugins.room apply false
+    alias libs.plugins.ktfmt
+    alias libs.plugins.hilt.android apply false
+    alias libs.plugins.detekt
+    alias libs.plugins.protobuf apply false
+    alias libs.plugins.kotlin.multiplatform apply false
+    alias libs.plugins.android.kotlin.multiplatform.library apply false
+    alias libs.plugins.android.lint apply false
+    alias libs.plugins.compose.multiplatform apply false
+}
+
+allprojects {
+
+    repositories {
+        google() // For github repos.
+        mavenLocal()
+        maven { url = "https://maven.google.com" }
+        maven { url = "https://jitpack.io" }
+        maven { url = "https://repo.osgeo.org/repository/release/" } // GeoTools
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: "com.ncorti.ktfmt.gradle" // Version should be inherited from parent
+
+    // https://github.com/cortinico/ktfmt-gradle
+    ktfmt {
+        googleStyle()
+    }
+}
+
+detekt {
+    toolVersion = "1.23.8"
+
+    source.setFrom(files(subprojects.collect { "${it.projectDir}/src" }))
+    allRules = true
+    config.setFrom(files("${project.rootDir}/config/detekt/detekt.yml"))
+    baseline = file("${project.rootDir}/config/detekt/baseline.xml")
+    buildUponDefaultConfig = true
+    ignoreFailures = false
+
+    basePath = projectDir
+}
+
+tasks.register('checkCode') {
+    dependsOn 'detekt'
+}
+subprojects {
+    rootProject.tasks.named('checkCode').configure {
+        dependsOn tasks.matching { task ->
+            task.name in ['checkstyle', 'ktfmtCheck', 'lintLocalDebug', 'lintAndroidMain']
+        }
+    }
+}
+

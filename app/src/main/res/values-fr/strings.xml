@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2024 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<resources>
+  <!--
+    LOI DATA FORMS
+  -->
+  <!-- Shown below fields that are required but left empty (TBD). -->
+  <string name="required_task">Ce champ est obligatoire</string>
+  <!--
+    LOCATION (GPS/CELL/WIFI) UPDATE ERROR MESSAGES
+  -->
+  <!-- Shown when user has refused to grant app fine grained location permission. -->
+  <string name="no_fine_location_permissions">Impossible d&#8217;afficher la position actuelle sans autorisation</string>
+  <!-- Shown when an unknown error occurs obtaining fine grained location permission. -->
+  <string name="location_updates_unknown_error">Échec de l&#8217;activation des mises à jour de localisation</string>
+  <!-- Shown when user has refused to enable location services in settings.-->
+  <string name="location_disabled_in_settings">Veuillez activer la localisation dans les paramètres du système</string>
+  <string name="map_view">Vue de carte</string>
+  <string name="unexpected_error">Une erreur inattendue est survenue</string>
+  <string name="google_api_install_failed">Échec de l&#8217;installation de Google Play Services</string>
+  <string name="sign_out">Déconnexion</string>
+  <string name="ok">OK</string>
+  <string name="add_data">Enregistrer</string>
+  <!-- Untranslated strings -->
+  <string name="offline_area_selector">Sélectionnez une zone à télécharger</string>
+  <string name="offline_area_selector_prompt">Sélectionnez une carte de base pour l&#8217;utilisation hors ligne</string>
+  <string name="offline_area_selector_download">Télécharger</string>
+  <string name="camera">Caméra</string>
+  <string name="photo_preview">Prévisualisation</string>
+  <string name="settings">Paramètres</string>
+  <string name="offline_area_viewer_title">Zone téléchargée</string>
+  <string name="offline_area_viewer_remove_button">Supprimer de l&#8217;appareil</string>
+  <string name="offline_area_download_error">Échec du téléchargement. Veuillez réessayer</string>
+  <!-- Label of button used enter the offline area selector. -->
+  <string name="offline_area_selector_select">Sélectionnez une zone</string>
+  <string name="no_basemaps_downloaded">Aucune image n&#8217;a été téléchargée pour l&#8217;utilisation hors ligne. Appuyez sur « Sélectionner et télécharger » pour commencer.</string>
+  <string name="connect_to_download_message">Vous êtes hors ligne. Connectez-vous pour télécharger la carte hors ligne</string>
+  <string name="signing_in">Se connecter</string>
+  <string name="sign_in_with_google">Se connecter avec Google</string>
+  <!-- Precedes the build number shown in the side menu of debug builds. -->
+  <string name="build">Générer %s</string>
+  <string name="tos_title">Conditions générales</string>
+  <string name="agree_terms">Accepter</string>
+  <string name="agree_checkbox">J&#8217;accepte</string>
+  <!-- Other strings (to be organized) -->
+  <string name="sync_status">État de synchronisation</string>
+  <string name="add_point">Ajouter point</string>
+  <string name="complete_polygon">Finir</string>
+  <string name="road_map">Carte routière</string>
+  <string name="satellite">Satellite</string>
+  <string name="terrain">Relief</string>
+  <string name="next">Suivant</string>
+  <string name="done">Soumettre</string>
+  <string name="skip">Ignore</string>
+  <string name="drop_pin">Placer une épingle</string>
+  <string name="add_site">Ajouter un site</string>
+  <string name="job_site_icon">Icône du site de la tâche</string>
+  <string name="drop_a_pin_tooltip_text">Faites glisser votre carte jusqu&#8217;à ce que l&#8217;épingle au centre se trouve à l&#8217;endroit souhaité.</string>
+  <string name="current_location">Localisation actuelle :</string>
+  <string name="loading">Chargement…</string>
+  <string name="no_tasks_error">Ce boulot n&#8217;a plus de tâches à effectuer</string>
+  <string name="invalid_data_sharing_terms">Cette enquête est mal configurée (aucune condition de partage des données n&#8217;est disponible). Veuillez contacter l&#8217;organisateur de l&#8217;enquête.</string>
+  <string name="collect_data_viewer_error">Impossible de collecter des données car l&#8217;utilisateur n&#8217;a que des droits de visualisation.</string>
+  <string name="offline_map_imagery">Cartes hors ligne</string>
+  <string name="offline_map_imagery_no_areas_downloaded_image">Aucune imagerie téléchargée</string>
+  <string name="offline_map_imagery_pref_description">Cacher ou afficher l&#8217;imagerie cartographique téléchargée</string>
+  <string name="layers">Couches</string>
+  <string name="base_map">Carte de base</string>
+  <string name="offline_map_imagery_download_progress_dialog_title">Progrès du téléchargement - %d%%</string>
+  <string name="offline_map_imagery_download_progress_dialog_message">Téléchargement d&#8217;imagerie cartographique hors ligne…</string>
+  <string name="multiple_regions">Plusieurs régions</string>
+  <string name="permission_denied">Autorisation refusée</string>
+  <string name="close_app">Fermer l&#8217;application</string>
+  <string name="cancel">Annuler</string>
+  <string name="save">Sauvegarder</string>
+  <string name="no_imagery_available_for_area">Pas d&#8217;imagerie pour cette zone. Sélectionnez une zone avec d&#8217;imagerie à télécharger sur votre appareil.</string>
+  <string name="selected_offline_area_size">La zone sélectionnée peut occuper jusqu&#8217;à %s\u00A0MB d&#8217;espace sur votre appareil.</string>
+  <string name="selected_offline_area_too_large">Zoomer et sélectionner une zone plus petite à télécharger sur votre appareil</string>
+  <string name="offline_area_size_loading_symbol">…</string>
+  <string name="offline_area_select_cancel_button">Annuler</string>
+  <string name="offline_area_selector_title">Télécharger cette zone ?</string>
+  <string name="capture">Capturer</string>
+  <string name="surveys">Enquêtes</string>
+  <string name="offline_icon_description">Icône affichée lorsque l&#8217;enquête est disponible hors ligne</string>
+  <string name="more_options_icon_description">Plus d&#8217; options</string>
+  <string name="remove_offline_access_warning_title">Avertissement</string>
+  <string name="remove_offline_access_warning_confirm_button">Retirer</string>
+  <string name="remove_offline_access_warning_dialog_body">Si vous supprimez l&#8217;accès hors ligne:\n \u2022 Toutes les données non synchronisées seront supprimées\n\nÊtes-vous sûr de vouloir supprimer l&#8217;accès hors ligne ?</string>
+  <string name="unnamed_point">Point non nommé</string>
+  <string name="unnamed_area">Zone non nommée</string>
+  <string name="unnamed_job">Tâche non nommée</string>
+  <string name="offline_area_size_on_disk_mb">%s\u00A0MB sur disque</string>
+  <string name="offline_area_list_item_size_on_disk_mb">%s\u00A0MB</string>
+  <string name="offline_downloaded_areas">Zones téléchargées</string>
+  <string name="offline_area_list_tip">Disponible pour visualisation hors ligne</string>
+  <string name="offline_area_list_item_icon">Icône de l&#8217;élément de la liste de la zone hors ligne</string>
+  <string name="no_surveys_available">Aucune enquête n&#8217;est disponible. Contactez votre organisateur d&#8217;enquête pour y accéder.</string>
+  <string name="previous">Précédent</string>
+  <string name="network_error_when_signing_in">Connectez-vous à l&#8217;internet pour vous identifier</string>
+  <string name="camera_permissions_needed">Veuillez autoriser l&#8217;appareil photo de cette application à soumettre des photos.</string>
+  <string name="incomplete_area">Zone incomplète</string>
+  <string name="initializing">Initialisation…</string>
+  <string name="draw_area_task_instruction">Déplacez la carte et touchez « Ajouter point » pour ajouter des points autour de la zone souhaitée.</string>
+  <string name="close">Fermer</string>
+  <string name="data_consent_dialog_title">Accord de partage de données</string>
+  <string name="map_location">Localisation sur la carte :</string>
+  <string name="sign_out_dialog_title">Données non synchronisées</string>
+  <string name="sign_out_dialog_body">Si vous vous déconnectez, toutes les données non synchronisées seront supprimées</string>
+  <string name="read_only_data_collection_hint">L&#8217;enquête est en lecture seule</string>
+  <string name="no_submissions">Aucune soumission</string>
+  <string name="dismiss_info_popup">Rejeter</string>
+  <string name="other">Autres</string>
+  <plurals name="submission_count">
+    <item quantity="one">%d soumission</item>
+    <item quantity="other">%d soumissions</item>
+  </plurals>
+  <string name="loi_name_dialog_title">Nommez ce lieu</string>
+  <string name="loi_name_dialog_body">Un nouveau site de collecte de données sera créé.</string>
+  <string name="current_survey">Enquête actuelle</string>
+  <string name="switch_survey">Changer l&#8217;enquête</string>
+  <string name="no_survey_selected">Aucune enquête sélectionnée</string>
+  <string name="undo">Annuler</string>
+  <string name="redo">Rétablir</string>
+  <string name="view_licenses_title">Licences</string>
+  <string name="about">À propos</string>
+  <string name="terms_of_service">Conditions générales d&#8217;utilisation</string>
+  <string name="about_ground">Ground est un projet communautaire open-source développé par Google et la FAO dans le cadre du « Forest Data Partnership » avec l&#8217;aide de SIG, Ecam et des contributeurs de la communauté open-source. \n\nIl est sous licence <annotation type="apache_license">Apache License, Version 2.0</annotation>. \n\nVoir autres <annotation type="all_licenses">Licenses</annotation></string>
+  <string name="pending_retry">Nouvelle tentative en attente</string>
+  <string name="uploaded">Téléversé</string>
+  <string name="uploading_form_data">Téléversement des données du formulaire</string>
+  <string name="pending">En attente</string>
+  <string name="photos_pending">Photos en attente</string>
+  <string name="photos_pending_retry">Photos en attente de nouvelle tentative</string>
+  <string name="uploading_photos">Téléversement des photos</string>
+  <string name="data_sync_status">État de synchronisation</string>
+  <string name="signout_warning">Si vous vous déconnectez, toutes les données non sauvegardées seront perdues.</string>
+  <string name="admin_request_access">Pour continuer, contactez votre administrateur système pour demander l&#8217;accès.</string>
+  <string name="signup_request_access">Pour continuer, <annotation type="sign_up_link">inscrivez-vous pour demander l&#8217;accès</annotation>.</string>
+  <!-- Settings -->
+  <string name="general_title">Configuration générale</string>
+  <string name="upload_media_title">Télécharger des médias</string>
+  <string name="over_wifi_summary">Uniquement par Wi-Fi</string>
+  <string name="help_title">Aide</string>
+  <string name="visit_website_title">Visiter le site web</string>
+  <string name="accuracy">Précision :</string>
+  <string name="select_language_title">Choix de la langue</string>
+  <!-- Data Sharing Consent Text -->
+  <string name="data_sharing_no_terms">*Aucune condition à afficher.*</string>
+  <string name="data_sharing_private_message">
+    ## Partage de données privées
+    \nLes données ne seront partagées qu&#8217;avec les organisateurs de l&#8217;enquête, qui ne peuvent pas partager et utiliser les données collectées publiquement.
+  </string>
+  <string name="data_sharing_public_message">
+    ## Partage des données publiques
+    \nLes organisateurs de l&#8217;enquête peuvent partager et utiliser les données publiquement sous la licence *Creative Commons CC0 1.0 License* :
+  </string>
+  <string name="draft_restored">Données non sauvegardées ont été restaurées</string>
+  <string name="load_tos_failed">Impossible de se connecter, réessayer plus tard</string>
+  <string name="data_collection_complete">Collecte des données terminée !</string>
+  <string name="data_collection_complete_details">Vos données ont été sauvegardées et seront automatiquement synchronisées lorsque vous serez en ligne.</string>
+  <string name="allow_location_confirmation">Autoriser la localisation</string>
+  <string name="allow_location_title">Autoriser le partage de la localisation</string>
+  <string name="allow_location_description">Si vous n&#8217;autorisez pas Ground à accéder à la localisation de cet appareil, vous ne pourrez pas continuer à collecter des données pour ce site.</string>
+  <string name="data_collection_cancellation_title">Arrêter la collecte de données ?</string>
+  <string name="data_collection_cancellation_description">Si vous quittez, les données que vous n&#8217;avez pas encore soumises seront supprimées.</string>
+  <string name="data_collection_cancellation_confirm_button">Confirmer</string>
+  <string name="something_went_wrong">Quelque chose s&#8217;est mal passé</string>
+  <string name="polygon_vertex_add_dialog_title">Zone invalide</string>
+  <string name="polygon_vertex_add_dialog_message">La zone ne peut pas s&#8217;auto-intersecter</string>
+  <string name="polygon_vertex_add_dialog_positive_button">D&#8217;accord</string>
+  <string name="clear">Claire</string>
+  <string name="text_task_data_character_limit">255 caractères maximum</string>
+  <string name="area_message">Surface: %s</string>
+  <string name="lang_english">Anglais</string>
+  <string name="lang_french">Français</string>
+  <string name="lang_spanish">Espagnol</string>
+  <string name="lang_portuguese">Portugais</string>
+  <string name="lang_vietnamese">Vietnamien</string>
+  <string name="lang_thai">Thaï</string>
+  <string name="lang_lao">Lao</string>
+  <string name="access_restricted">Restreint</string>
+  <string name="access_unlisted">Non répertorié</string>
+  <string name="access_public">Public</string>
+  <string name="section_on_device">Sur cet appareil</string>
+  <string name="section_shared_with_me">Partagé avec moi</string>
+  <string name="section_public">Public</string>
+
+  <string name="dialog_title_update_required">Mise à jour requise</string>
+  <string name="dialog_message_update_required">Une nouvelle version de l&#8217;application est disponible. Veuillez mettre à jour pour continuer à utiliser l&#8217;application.</string>
+  <string name="dialog_button_update">Mettre à jour</string>
+
+  <string name="select_length_title">Sélectionner les unités</string>
+  <string name="length_metric">Métrique</string>
+  <string name="length_imperial">Impérial</string>
+
+  <string name="delete_site">Supprimer le site</string>
+  <string name="delete_site_dialog_title">Supprimer le site ?</string>
+  <string name="delete_site_dialog_message">Ce site et toutes les données associées seront définitivement supprimés. Cette action ne peut pas être annulée.</string>
+  <string name="delete">Supprimer</string>
+
+  <string name="location_not_accurate_heading">Votre position n&#8217;est pas précise</string>
+  <string name="location_not_accurate_description">Essayez de rester immobile ou d&#8217;attendre une position plus précise</string>
+
+  <string name="recenter">Recentrer</string>
+  <string name="survey_load_timeout_error">Le chargement du sondage a expiré. Veuillez vérifier votre connexion et réessayer.</string>
+  <string name="camera_launch_failed_title">Erreur de caméra</string>
+  <string name="camera_launch_failed_desc">Impossible d&#8217;ouvrir la caméra. Veuillez réessayer.</string>
+  <string name="photo_save_failed_title">Erreur d&#8217;enregistrement</string>
+  <string name="photo_save_failed_desc">Impossible d&#8217;enregistrer la photo capturée. Veuillez réessayer.</string>
+  <string name="share_location">Partager l&#8217;emplacement</string>
+  <string name="scan_this_qr_to_download_geojson">Scannez ce code QR pour afficher le GeoJson</string>
+  <string name="share">Partager</string>
+</resources>

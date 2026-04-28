@@ -1,0 +1,390 @@
+/*
+ * Copyright 2018 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlinx-serialization'
+apply plugin: 'com.google.dagger.hilt.android'
+apply plugin: 'com.google.devtools.ksp'
+apply plugin: 'androidx.room'
+apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.android.gms.oss-licenses-plugin'
+apply plugin: 'com.google.protobuf'
+apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+
+apply from: '../config/checkstyle/checkstyle.gradle'
+apply from: '../config/lint/lint.gradle'
+apply from: '../config/jacoco/jacoco.gradle'
+
+// Directory where downloaded Protocol Buffer definitions are extracted to.
+def extractedGroundProtoPath = layout.buildDirectory.dir('extracted-ground-protos')
+
+// Gets the total number of commits
+static def getGitCommitCount() {
+    return 'git rev-list --count HEAD'.execute().text.trim().toInteger()
+}
+
+// Gets the current git branch name and sanitizes it
+static def getGitBranchName() {
+    def branch = 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
+    if (branch && branch != "HEAD") {
+        return branch.replace('/', '-') // Replaces 'feature/login' with 'feature-login'
+    } else {
+        return "detached-head" // Fallback
+    }
+}
+
+// Gets the short 7-character hash
+static def getGitHash() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+android {
+    compileSdk = libs.versions.androidCompileSdk.get().toInteger()
+    sourceSets {
+        main {
+            proto {
+                srcDir extractedGroundProtoPath
+            }
+            assets {
+                srcDirs 'src/main/assets'
+            }
+        }
+        test {
+            proto {
+                srcDir 'src/test/proto'
+            }
+            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        }
+    }
+    defaultConfig {
+        manifestPlaceholders
+        applicationId "cuongnt.MapVNUFSurvey"
+        minSdkVersion libs.versions.androidMinSdk.get().toInteger()
+        targetSdkVersion libs.versions.androidTargetSdk.get().toInteger()
+
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled = true
+        // For rendering vector map markers.
+        vectorDrawables.useSupportLibrary = true
+        buildConfigField "String", "EMULATOR_HOST", "\"10.0.2.2\""
+        buildConfigField "int", "FIRESTORE_EMULATOR_PORT", "8080"
+        buildConfigField "int", "AUTH_EMULATOR_PORT", "9099"
+        buildConfigField "String", "SIGNUP_FORM_LINK", "\"\""
+        manifestPlaceholders.usesCleartextTraffic = true
+    }
+
+    // Use flag -PtestBuildType with desired variant to change default behavior.
+    testBuildType = project.getProperties().getOrDefault("testBuildType", "debug")
+
+    // gradle doesn't sign debug test apk (needed for running instrumentation tests on firebase)
+    // https://stackoverflow.com/questions/3082780/java-lang-securityexception-permission-denial/38202106
+    signingConfigs {
+        staging {
+            keyPassword 'ground'
+            storeFile file('../cloud-builder/sign/keystore')
+            storePassword 'ground'
+            keyAlias 'ground'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+            FirebasePerformance {
+                instrumentationEnabled = false
+            }
+        }
+        staging {
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+            signingConfig = signingConfigs.staging
+            FirebasePerformance {
+                instrumentationEnabled = false
+            }
+        }
+    }
+
+    flavorDimensions "backend"
+    productFlavors {
+        local {
+            dimension "backend"
+            versionNameSuffix "-local"
+            buildConfigField "boolean", "USE_EMULATORS", "true"
+            manifestPlaceholders.usesCleartextTraffic = true
+        }
+        openforis {
+            dimension "backend"
+            buildConfigField "boolean", "USE_EMULATORS", "false"
+        }
+        devSig {
+            dimension "backend"
+            buildConfigField "boolean", "USE_EMULATORS", "false"
+        }
+        dev {
+            dimension "backend"
+            versionNameSuffix "-dev"
+            buildConfigField "boolean", "USE_EMULATORS", "false"
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+        compose = true
+        dataBinding = true
+        viewBinding = true
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            all {
+                jvmArgs '-Xmx4g' // '-XX:+HeapDumpOnOutOfMemoryError'
+            }
+        }
+        animationsDisabled = true
+    }
+
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
+
+    namespace = 'cuongnt.MapVNUFSurvey'
+}
+
+configurations {
+    groundProtoJar
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':core:domain')
+    implementation project(':core:ui')
+    implementation libs.androidx.multidex
+    implementation libs.androidx.preference.ktx
+
+    // Kotlin
+    implementation platform(libs.kotlinx.serialization.bom)
+    implementation libs.kotlin.reflect
+    implementation libs.kotlin.stdlib
+    implementation libs.kotlinx.collections.immutable
+    implementation libs.kotlinx.serialization.json
+    implementation libs.kotlinx.serialization.protobuf
+
+    // Kotlin Coroutines
+    implementation platform(libs.kotlinx.coroutines.bom)
+    implementation libs.kotlinx.coroutines.android
+    implementation libs.kotlinx.coroutines.core
+    testImplementation libs.kotlinx.coroutines.test
+
+    // Android legacy support Libraries
+    implementation libs.androidx.appcompat
+
+    // UI Widgets
+    implementation libs.androidx.constraintlayout
+    implementation libs.material
+
+    // Jetpack Compose
+    implementation platform(libs.androidx.compose.bom)
+    androidTestImplementation platform(libs.androidx.compose.bom)
+    debugImplementation libs.androidx.ui.test.manifest
+    debugImplementation libs.androidx.ui.tooling
+    implementation libs.androidx.material.icons
+    implementation libs.androidx.material3.android
+    implementation libs.androidx.runtime.livedata
+    implementation libs.androidx.ui
+    implementation libs.androidx.ui.tooling.preview.android
+    stagingImplementation libs.androidx.ui.test.manifest
+    testImplementation libs.androidx.ui.test.junit4
+    implementation libs.androidx.navigation.compose
+    implementation libs.androidx.hilt.navigation.compose
+
+    // Images
+    implementation libs.coil.compose
+
+    // Google Play Services
+    implementation libs.play.services.auth
+    implementation libs.play.services.location
+    implementation libs.play.services.maps
+
+    // Maps Utils
+    implementation libs.android.maps.utils
+
+    // GeoJSON Support
+    implementation libs.gson
+
+    // Firebase and related libraries.
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.auth
+    implementation libs.firebase.analytics
+    implementation libs.firebase.config
+    implementation libs.firebase.crashlytics
+    implementation libs.firebase.firestore
+    implementation libs.firebase.functions
+    implementation libs.firebase.messaging
+    implementation libs.firebase.messaging.directboot
+    implementation libs.firebase.perf
+    implementation libs.firebase.storage
+
+    // Hilt
+    implementation libs.androidx.hilt.navigation.fragment
+    implementation libs.androidx.hilt.work
+    implementation libs.hilt.android
+    testImplementation libs.hilt.android.testing
+    androidTestImplementation libs.hilt.android.testing
+    ksp libs.hilt.compiler
+    ksp libs.hilt.android.compiler
+    kspTest libs.hilt.android.compiler
+    kspAndroidTest libs.hilt.android.compiler
+
+    // Android Arch Lifecycle
+    implementation libs.androidx.lifecycle.runtime.ktx
+
+    // Android Navigation
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
+
+    // Auto-value
+    compileOnly libs.auto.value.annotations
+    ksp libs.auto.value
+
+    // Logging
+    implementation libs.timber
+
+    // Room
+    implementation libs.androidx.room.runtime
+    androidTestImplementation libs.androidx.room.testing
+    ksp libs.androidx.room.compiler
+
+    // WorkManager
+    implementation libs.androidx.work.runtime.ktx
+    testImplementation libs.androidx.work.testing
+
+    // OSS Licenses Plugin
+    implementation libs.play.services.oss.licenses
+
+    // Markdown Parser
+    implementation libs.markdown
+
+    // Testing
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.runner
+    androidTestImplementation libs.core.testing
+    androidTestImplementation libs.truth
+    testImplementation libs.androidx.core
+    testImplementation libs.androidx.core.testing
+    testImplementation libs.androidx.navigation.testing
+    testImplementation libs.core.testing
+    testImplementation libs.json
+    testImplementation libs.junit
+    testImplementation libs.kotlin.test
+    testImplementation libs.robolectric
+    testImplementation libs.testing
+    testImplementation libs.turbine
+    testImplementation libs.truth
+
+    // Mockito
+    testImplementation platform(libs.mockito.bom)
+    androidTestImplementation platform(libs.mockito.bom)
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.inline
+    testImplementation libs.mockito.kotlin
+    testImplementation libs.mockito.android
+    androidTestImplementation libs.mockito.core
+
+    // Espresso
+    testImplementation libs.androidx.espresso.contrib
+    testImplementation(libs.androidx.espresso.core) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestImplementation(libs.androidx.espresso.core) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    // Fragments
+    debugImplementation libs.androidx.fragment.testing.manifest
+
+    // TODO: Move protos into shared module and set correct path here.
+    // Issue URL: https://github.com/google/ground-android/issues/1748
+    api(libs.protobuf.kotlin.lite)
+
+    // Pulls protodefs from the specified commit in the ground-platform repo.
+    groundProtoJar libs.ground.platform
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.26.1"
+    }
+    generateProtoTasks {
+        all().each {
+            it.plugins {
+                // Generated Kotlin classes depend on these.
+                create("java") {
+                    option("lite")
+                }
+            }
+            it.builtins {
+                create("kotlin") {
+                    option("lite")
+                }
+            }
+            it.dependsOn extractGroundProtoJar
+        }
+    }
+}
+
+// Extracts protodefs in downloaded JAR to the build/extracted-protos dirs.
+task extractGroundProtoJar(type: Copy) {
+    from(
+        // Defer resolution until after configuration phase.
+        provider {
+            configurations.groundProtoJar.collect {
+                zipTree(it)
+            }
+        })
+    into extractedGroundProtoPath
+    include "**/*.proto"
+}
+
+apply plugin: 'androidx.navigation.safeargs'
+
+// This must be last to avoid dependency collisions.
+// https://developers.google.com/android/guides/google-services-plugin#introduction
+apply plugin: 'com.google.gms.google-services'
+
+kotlin {
+    jvmToolchain libs.versions.jvmToolchainVersion.get().toInteger()
+}
+
+secrets {
+    // Location of file containing Maps API key for this project. Should not be checked into
+    // version control.
+    propertiesFileName = "secrets.properties"
+
+    // A properties file containing default secret values. This file can be
+    // checked in version control.
+    defaultPropertiesFileName = "local.defaults.properties"
+}
+

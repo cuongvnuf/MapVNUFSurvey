@@ -1,0 +1,76 @@
+/*
+ * Copyright 2021 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+tasks.withType(Test).configureEach {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+def isAndroidModule = plugins.hasPlugin('com.android.application') || plugins.hasPlugin('com.android.library')
+def isKmpModule = plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')
+def excludesList = [
+    '**/databinding/*',
+    '**/proto/*',
+    '**/migration/*',
+    '**/local/room/dao/*',
+    '**/*_Factory*',
+    '**/*Hilt*',
+    '**/*Args*',
+    '**/*Directions*',
+    '**/LocalDatabase_Impl*',
+    '**/*Module*',
+    '**/data/remote/firebase/base/*',
+    '**/data/remote/firebase/schema/*Reference*',
+    '**/data/remote/firebase/FirebaseStorageManager*',
+    '**/data/remote/firebase/FirestoreDataStore*',
+    '**/system/channel/LocationSharedFlowCallback*',
+]
+def testTaskName
+def classDirs
+def sourceDirs
+def execData
+
+if (isAndroidModule) {
+    testTaskName = 'testLocalDebugUnitTest'
+    classDirs = 'build/intermediates/classes/localDebug/transformLocalDebugClassesWithAsm/dirs/org/groundplatform/android'
+    sourceDirs = ['src/main/java/org/groundplatform/android']
+    execData = 'build/jacoco/testLocalDebugUnitTest.exec'
+} else if (isKmpModule) {
+    testTaskName = 'jvmTest'
+    classDirs = 'build/classes/kotlin/jvm/main'
+    sourceDirs = ['src/commonMain/kotlin']
+    execData = 'build/jacoco/jvmTest.exec'
+}
+
+tasks.register('jacocoLocalDebugUnitTestReport', JacocoReport) {
+    dependsOn tasks.named(testTaskName)
+    group = "Reporting"
+    description = "Run tests and generate coverage reports"
+    reports {
+        csv.required = false
+        xml.required = true
+        html.required = true
+    }
+    classDirectories.from = fileTree(dir: classDirs, excludes: excludesList)
+    sourceDirectories.from = files(sourceDirs)
+    executionData.from = files(execData)
+}

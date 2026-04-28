@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright 2024 Google LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+  <!-- 100% opacity for cluster body. -->
+  <color name="clusterBalloonFillColor">#6DDD81</color>
+  <!-- 29% opacity for cluster's outer ring. -->
+  <color name="clusterBalloonStrokeColor">#4B6DDD81</color>
+  <color name="textOverMap">#FCFDF7</color>
+  <color name="blackOverlay">#000000</color>
+  <!-- DrawArea color palette -->
+  <color name="drawAreaLineStringStrokeColor">#EDAE3D</color>
+
+  <!-- Updated Color palette -->
+  <color name="md_theme_primary">#006E2C</color>
+  <color name="md_theme_onPrimary">#FFFFFF</color>
+  <color name="md_theme_primaryContainer">#89FA9B</color>
+  <color name="md_theme_onPrimaryContainer">#002108</color>
+  <color name="md_theme_secondary">#516351</color>
+  <color name="md_theme_onSecondary">#FFFFFF</color>
+  <color name="md_theme_secondaryContainer">#D4E8D1</color>
+  <color name="md_theme_onSecondaryContainer">#0F1F11</color>
+  <color name="md_theme_tertiary">#39656C</color>
+  <color name="md_theme_onTertiary">#FFFFFF</color>
+  <color name="md_theme_tertiaryContainer">#BDEAF3</color>
+  <color name="md_theme_onTertiaryContainer">#001F24</color>
+  <color name="md_theme_error">#BA1A1A</color>
+  <color name="md_theme_onError">#FFFFFF</color>
+  <color name="md_theme_errorContainer">#FFDAD6</color>
+  <color name="md_theme_onErrorContainer">#410002</color>
+  <color name="md_theme_outline">#727970</color>
+  <color name="md_theme_background">#FCFDF7</color>
+  <color name="md_theme_onBackground">#1A1C19</color>
+  <color name="md_theme_surface">#F9FAF4</color>
+  <color name="md_theme_surfaceContainer">#F0F4F9</color>
+  <color name="md_theme_surfaceContainerLow">#F8FAFD</color>
+  <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
+  <color name="md_theme_onSurface">#1A1C19</color>
+  <color name="md_theme_surfaceVariant">#DDE5D9</color>
+  <color name="md_theme_onSurfaceVariant">#424940</color>
+  <color name="md_theme_inverseSurface">#2E312D</color>
+  <color name="md_theme_inverseOnSurface">#F0F1EB</color>
+  <color name="md_theme_inversePrimary">#6DDD81</color>
+  <color name="accuracy_bad">#F44336</color>
+  <color name="accuracy_good">#424940</color>
+</resources>

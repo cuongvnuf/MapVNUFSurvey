@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "538574815505",
+    "project_id": "mapvnufsurvey",
+    "storage_bucket": "mapvnufsurvey.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538574815505:android:1810fb964eada644940cb0",
+        "android_client_info": {
+          "package_name": "cuongnt.MapVNUFSurvey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538574815505-13nm6fpn4el045m99d5bs6df1ib9n8js.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF5lVvN8lk7ySEJKrO-ApBGPSNtq5c3OA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538574815505-13nm6fpn4el045m99d5bs6df1ib9n8js.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
