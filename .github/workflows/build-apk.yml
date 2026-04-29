@@ -30,21 +30,36 @@ jobs:
         run: |
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" > app/secrets.properties
 
+      # - name: Build Debug APK
+      #   id: build
+      #   run: |
+      #     ./gradlew assembleLocalDebug --info 2>&1 | tee /tmp/build_full.txt
+      #     exit ${PIPESTATUS[0]}
+      #   continue-on-error: true
       - name: Build Debug APK
         id: build
         run: |
-          ./gradlew assembleLocalDebug --info 2>&1 | tee /tmp/build_full.txt
+          ./gradlew assembleLocalDebug --stacktrace --debug 2>&1 | tee /tmp/build_full.txt
           exit ${PIPESTATUS[0]}
         continue-on-error: true
-
-      - name: Show actual errors
+       - name: Show actual errors
         if: steps.build.outcome == 'failure'
         run: |
-          echo "=== ERROR LINES ==="
-          grep -n "error:\|FAILED\|\[Hilt\]\|\[Room\]\|KaptException\|Unresolved\|cannot find" /tmp/build_full.txt | head -80 || true
-          echo "=== LAST 80 LINES ==="
-          tail -80 /tmp/build_full.txt
+          echo "=== KAPT EXCEPTION ==="
+          grep -A 30 "KaptExecutionWorkAction\|KaptException\|Caused by:" /tmp/build_full.txt | head -100 || true
+          echo "=== ALL ERRORS ==="
+          grep -n "error:\|FAILED\|\[Hilt\]\|\[Room\]\|cannot find symbol\|Unresolved" /tmp/build_full.txt | head -80 || true
+          echo "=== LAST 50 LINES ==="
+          tail -50 /tmp/build_full.txt
           exit 1
+      # - name: Show actual errors
+      #   if: steps.build.outcome == 'failure'
+      #   run: |
+      #     echo "=== ERROR LINES ==="
+      #     grep -n "error:\|FAILED\|\[Hilt\]\|\[Room\]\|KaptException\|Unresolved\|cannot find" /tmp/build_full.txt | head -80 || true
+      #     echo "=== LAST 80 LINES ==="
+      #     tail -80 /tmp/build_full.txt
+      #     exit 1
 
       - name: Upload APK
         if: steps.build.outcome == 'success'
