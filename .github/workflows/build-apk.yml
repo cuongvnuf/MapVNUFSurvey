@@ -31,7 +31,7 @@ jobs:
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" > app/secrets.properties
 
       - name: Build Debug APK
-        run: ./gradlew assembleLocalDebug
+        run: ./gradlew assembleLocalDebug --stacktrace 2>&1 | tail -100
 
       - name: Upload APK
         uses: actions/upload-artifact@v4.6.2
