@@ -29,28 +29,23 @@ jobs:
       - name: Create secrets.properties
         run: |
           echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" > app/secrets.properties
+
       - name: Build Debug APK
         id: build
-        run: ./gradlew assembleLocalDebug --stacktrace 2>&1
+        run: |
+          ./gradlew assembleLocalDebug --info 2>&1 | tee /tmp/build_full.txt
+          exit ${PIPESTATUS[0]}
         continue-on-error: true
-      - name: Show Kapt error details
+
+      - name: Show actual errors
         if: steps.build.outcome == 'failure'
         run: |
-          echo "=== PROBLEMS REPORT ==="
-          find . -path "*/build/reports/problems*" -name "*.html" 2>/dev/null | while read f; do
-            echo "--- $f ---"
-            cat "$f" | sed 's/<[^>]*>//g' | grep -v "^$" | head -100
-          done
-          echo "=== ALL BUILD ERRORS ==="
-          find . -path "*/build/outputs/logs*" -o -path "*/build/tmp/kapt*" 2>/dev/null | xargs ls -la 2>/dev/null || true
-          find . -name "*.log" -path "*/build/*" 2>/dev/null | while read f; do
-            echo "--- $f ---"
-            tail -50 "$f"
-          done
-          echo "=== KAPT STUBS ==="
-          find . -path "*/kapt3/stubs*" -name "*.java" 2>/dev/null | head -5 | xargs head -30 2>/dev/null || true
+          echo "=== ERROR LINES ==="
+          grep -n "error:\|FAILED\|\[Hilt\]\|\[Room\]\|KaptException\|Unresolved\|cannot find" /tmp/build_full.txt | head -80 || true
+          echo "=== LAST 80 LINES ==="
+          tail -80 /tmp/build_full.txt
           exit 1
- 
+
       - name: Upload APK
         if: steps.build.outcome == 'success'
         uses: actions/upload-artifact@v4.6.2
