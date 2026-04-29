@@ -16,7 +16,7 @@
 package org.groundplatform.android.common
 
 import android.content.Context
-import cuongnt.MapVNUFSurvey.BuildConfig
+import cuongnt.mapvnufsurvey.BuildConfig
 import org.groundplatform.android.model.map.MapType
 
 /** Application constants. */

@@ -75,7 +75,7 @@ android {
     }
     defaultConfig {
         manifestPlaceholders
-        applicationId "cuongnt.MapVNUFSurvey"
+        applicationId "cuongnt.mapvnufsurvey"
         minSdkVersion libs.versions.androidMinSdk.get().toInteger()
         targetSdkVersion libs.versions.androidTargetSdk.get().toInteger()
 
@@ -170,7 +170,7 @@ android {
         schemaDirectory("$projectDir/schemas")
     }
 
-    namespace = 'cuongnt.MapVNUFSurvey'
+    namespace = 'cuongnt.mapvnufsurvey'
 }
 
 configurations {

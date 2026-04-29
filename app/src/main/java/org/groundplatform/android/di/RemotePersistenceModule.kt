@@ -27,9 +27,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import cuongnt.MapVNUFSurvey.BuildConfig.EMULATOR_HOST
-import cuongnt.MapVNUFSurvey.BuildConfig.FIRESTORE_EMULATOR_PORT
-import cuongnt.MapVNUFSurvey.BuildConfig.USE_EMULATORS
+import cuongnt.mapvnufsurvey.BuildConfig.EMULATOR_HOST
+import cuongnt.mapvnufsurvey.BuildConfig.FIRESTORE_EMULATOR_PORT
+import cuongnt.mapvnufsurvey.BuildConfig.USE_EMULATORS
 import org.groundplatform.android.data.remote.RemoteDataStore
 import org.groundplatform.android.data.remote.RemoteStorageManager
 import org.groundplatform.android.data.remote.firebase.FirebaseStorageManager

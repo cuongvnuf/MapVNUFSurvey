@@ -21,7 +21,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import cuongnt.MapVNUFSurvey.BuildConfig
+import cuongnt.mapvnufsurvey.BuildConfig
 import org.groundplatform.android.system.auth.AnonymousAuthenticationManager
 import org.groundplatform.android.system.auth.AuthenticationManager
 import org.groundplatform.android.system.auth.GoogleAuthenticationManager

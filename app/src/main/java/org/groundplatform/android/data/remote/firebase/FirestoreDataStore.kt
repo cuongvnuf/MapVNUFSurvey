@@ -29,7 +29,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import cuongnt.MapVNUFSurvey.BuildConfig.USE_EMULATORS
+import cuongnt.mapvnufsurvey.BuildConfig.USE_EMULATORS
 import org.groundplatform.android.data.remote.RemoteDataStore
 import org.groundplatform.android.data.remote.firebase.schema.GroundFirestore
 import org.groundplatform.android.di.coroutines.IoDispatcher

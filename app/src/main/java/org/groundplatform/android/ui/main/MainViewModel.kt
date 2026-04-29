@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import cuongnt.MapVNUFSurvey.BuildConfig
+import cuongnt.mapvnufsurvey.BuildConfig
 import org.groundplatform.android.common.Constants.SURVEY_PATH_SEGMENT
 import org.groundplatform.android.di.coroutines.IoDispatcher
 import org.groundplatform.android.repository.TermsOfServiceRepository

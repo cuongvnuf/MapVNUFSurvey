@@ -106,7 +106,7 @@ internal constructor(
         HomeDrawerState(
           user = user,
           survey = survey,
-          appVersion = cuongnt.MapVNUFSurvey.BuildConfig.VERSION_NAME,
+          appVersion = cuongnt.mapvnufsurvey.BuildConfig.VERSION_NAME,
         )
       }
       .stateIn(viewModelScope, SharingStarted.Lazily, null)

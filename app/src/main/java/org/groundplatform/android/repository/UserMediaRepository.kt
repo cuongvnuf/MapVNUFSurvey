@@ -128,7 +128,7 @@ constructor(
   fun getUriForFile(file: File): Uri =
     androidx.core.content.FileProvider.getUriForFile(
       context,
-      cuongnt.MapVNUFSurvey.BuildConfig.APPLICATION_ID,
+      cuongnt.mapvnufsurvey.BuildConfig.APPLICATION_ID,
       file,
     )
 }
