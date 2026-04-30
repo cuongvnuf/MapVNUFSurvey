@@ -35,7 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 
 @Composable
 fun DownloadProgressDialog(progress: Float, onDismiss: () -> Unit) {

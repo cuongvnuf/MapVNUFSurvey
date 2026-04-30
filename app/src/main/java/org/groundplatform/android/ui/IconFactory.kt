@@ -30,7 +30,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.ui.util.obtainTextPaintFromStyle
 
 /** Responsible for building dynamically generated icon bitmaps. */

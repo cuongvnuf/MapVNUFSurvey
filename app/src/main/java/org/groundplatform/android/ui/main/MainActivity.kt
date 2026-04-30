@@ -31,8 +31,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
-import org.groundplatform.android.R
-import org.groundplatform.android.databinding.MainActBinding
+import cuongnt.mapvnufsurvey.R
+import cuongnt.mapvnufsurvey.databinding.MainActBinding
 import org.groundplatform.android.system.ActivityCallback
 import org.groundplatform.android.system.ActivityStreams
 import org.groundplatform.android.ui.common.AbstractActivity

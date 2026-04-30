@@ -29,9 +29,9 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.data.local.room.converter.SubmissionDeltasConverter
-import org.groundplatform.android.databinding.HomeScreenFragBinding
+import cuongnt.mapvnufsurvey.databinding.HomeScreenFragBinding
 import org.groundplatform.android.ui.common.AbstractFragment
 import org.groundplatform.android.ui.common.BackPressListener
 import org.groundplatform.android.ui.common.EphemeralPopups

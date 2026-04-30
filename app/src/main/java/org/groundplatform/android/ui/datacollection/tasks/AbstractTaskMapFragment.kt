@@ -36,9 +36,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlinx.coroutines.launch
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.common.Constants.ACCURACY_THRESHOLD_IN_M
-import org.groundplatform.android.databinding.MapTaskFragBinding
+import cuongnt.mapvnufsurvey.databinding.MapTaskFragBinding
 import org.groundplatform.android.model.map.CameraPosition
 import org.groundplatform.android.ui.common.AbstractMapContainerFragment
 import org.groundplatform.android.ui.common.BaseMapViewModel

@@ -17,7 +17,7 @@ package org.groundplatform.android.ui.datacollection.components
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 
 /** Defines a unique action that can be bound to a [TaskButton], along with the UI styling. */
 enum class ButtonAction(

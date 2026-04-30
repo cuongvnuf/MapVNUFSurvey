@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import javax.inject.Inject
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.common.Constants.isReleaseBuild
 import org.groundplatform.android.ui.IconFactory
 import org.groundplatform.android.ui.map.Feature

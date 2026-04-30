@@ -23,7 +23,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.di.coroutines.IoDispatcher
 import org.groundplatform.android.ui.map.gms.GmsExt.center
 import org.groundplatform.domain.model.geometry.Coordinates

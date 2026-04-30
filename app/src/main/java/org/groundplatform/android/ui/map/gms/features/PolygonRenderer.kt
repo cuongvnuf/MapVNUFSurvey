@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.JointType
 import com.google.android.gms.maps.model.Polygon as MapsPolygon
 import com.google.android.gms.maps.model.PolygonOptions
 import javax.inject.Inject
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.ui.map.Feature
 import org.groundplatform.android.ui.map.gms.POLYGON_Z
 import org.groundplatform.android.ui.map.gms.toLatLng

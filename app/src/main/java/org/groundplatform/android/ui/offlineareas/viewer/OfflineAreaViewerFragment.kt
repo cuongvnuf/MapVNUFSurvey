@@ -26,7 +26,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlinx.coroutines.launch
-import org.groundplatform.android.databinding.OfflineAreaViewerFragBinding
+import cuongnt.mapvnufsurvey.databinding.OfflineAreaViewerFragBinding
 import org.groundplatform.android.model.map.MapType
 import org.groundplatform.android.ui.common.AbstractMapContainerFragment
 import org.groundplatform.android.ui.common.BaseMapViewModel

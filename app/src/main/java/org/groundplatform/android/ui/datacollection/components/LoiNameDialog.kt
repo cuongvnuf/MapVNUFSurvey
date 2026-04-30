@@ -31,7 +31,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 
 const val LOI_NAME_TEXT_FIELD_TEST_TAG: String = "loi name text field test tag"
 

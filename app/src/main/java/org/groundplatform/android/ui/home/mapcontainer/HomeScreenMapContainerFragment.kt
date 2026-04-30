@@ -25,8 +25,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import org.groundplatform.android.R
-import org.groundplatform.android.databinding.BasemapLayoutBinding
+import cuongnt.mapvnufsurvey.R
+import cuongnt.mapvnufsurvey.databinding.BasemapLayoutBinding
 import org.groundplatform.android.ui.common.AbstractMapContainerFragment
 import org.groundplatform.android.ui.common.BaseMapViewModel
 import org.groundplatform.android.ui.common.EphemeralPopups

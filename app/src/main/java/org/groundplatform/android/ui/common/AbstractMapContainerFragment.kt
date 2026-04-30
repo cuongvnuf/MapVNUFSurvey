@@ -22,7 +22,7 @@ import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import javax.inject.Inject
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.system.GeocodingManager
 import org.groundplatform.android.system.PermissionDeniedException
 import org.groundplatform.android.system.SettingsChangeRequestCanceled

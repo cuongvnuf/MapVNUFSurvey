@@ -30,7 +30,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTag
 import dagger.hilt.android.AndroidEntryPoint
-import org.groundplatform.android.databinding.SyncStatusFragBinding
+import cuongnt.mapvnufsurvey.databinding.SyncStatusFragBinding
 import org.groundplatform.android.ui.common.AbstractFragment
 import org.groundplatform.android.util.setComposableContent
 

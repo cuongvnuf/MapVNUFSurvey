@@ -26,7 +26,7 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.repository.TermsOfServiceRepository
 import org.groundplatform.android.system.auth.AuthenticationManager
 import org.groundplatform.android.ui.common.AbstractViewModel

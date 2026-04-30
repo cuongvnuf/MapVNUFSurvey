@@ -32,8 +32,8 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.groundplatform.android.R
-import org.groundplatform.android.databinding.OfflineAreasFragBinding
+import cuongnt.mapvnufsurvey.R
+import cuongnt.mapvnufsurvey.databinding.OfflineAreasFragBinding
 import org.groundplatform.android.ui.common.AbstractFragment
 import org.groundplatform.android.util.setComposableContent
 

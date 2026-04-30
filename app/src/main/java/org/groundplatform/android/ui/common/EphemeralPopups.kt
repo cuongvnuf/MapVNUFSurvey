@@ -22,7 +22,7 @@ import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 import javax.inject.Singleton
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 
 /** Displays short-lived messages such as toasts that are shown over other UI elements. */
 @Suppress("UseDataClass")

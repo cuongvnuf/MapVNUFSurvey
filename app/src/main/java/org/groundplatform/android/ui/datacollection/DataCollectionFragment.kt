@@ -36,8 +36,8 @@ import javax.inject.Inject
 import kotlin.getValue
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
-import org.groundplatform.android.R
-import org.groundplatform.android.databinding.DataCollectionFragBinding
+import cuongnt.mapvnufsurvey.R
+import cuongnt.mapvnufsurvey.databinding.DataCollectionFragBinding
 import org.groundplatform.android.ui.common.AbstractFragment
 import org.groundplatform.android.ui.common.BackPressListener
 import org.groundplatform.android.ui.components.ConfirmationDialog

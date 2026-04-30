@@ -17,7 +17,7 @@ package org.groundplatform.android.ui.common
 
 import android.content.res.Resources
 import javax.inject.Inject
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.domain.model.geometry.Geometry
 import org.groundplatform.domain.model.geometry.MultiPolygon
 import org.groundplatform.domain.model.geometry.Point

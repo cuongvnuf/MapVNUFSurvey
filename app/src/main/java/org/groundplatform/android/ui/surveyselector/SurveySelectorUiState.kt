@@ -15,7 +15,7 @@
  */
 package org.groundplatform.android.ui.surveyselector
 
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.model.SurveyListItem
 
 /** Represents a section of surveys in the survey list. */
