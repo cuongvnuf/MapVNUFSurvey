@@ -42,7 +42,7 @@ import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import java.util.regex.Pattern
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.e2etest.TestConfig.DEFAULT_TIMEOUT
 import org.groundplatform.android.e2etest.TestConfig.TEST_PHOTO_FILE
 import org.groundplatform.android.e2etest.extensions.onTarget

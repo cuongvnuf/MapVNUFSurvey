@@ -16,7 +16,7 @@
 package org.groundplatform.android.e2etest.robots
 
 import androidx.compose.ui.test.ExperimentalTestApi
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.e2etest.drivers.TestDriver
 import org.groundplatform.android.ui.components.LOCATION_NOT_LOCKED_TEST_TAG
 

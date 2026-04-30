@@ -15,7 +15,7 @@
  */
 package org.groundplatform.android.e2etest.robots
 
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.e2etest.drivers.TestDriver
 
 class TermsOfServiceRobot(override val testDriver: TestDriver) : Robot<TermsOfServiceRobot>() {

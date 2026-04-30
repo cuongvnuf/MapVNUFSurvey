@@ -15,7 +15,7 @@
  */
 package org.groundplatform.android.e2etest.robots
 
-import org.groundplatform.android.R
+import cuongnt.mapvnufsurvey.R
 import org.groundplatform.android.e2etest.MultipleChoiceType
 import org.groundplatform.android.e2etest.TestConfig.CONDITIONAL_TRIGGER_OPTION
 import org.groundplatform.android.e2etest.TestConfig.COVER_CROPPING_TEST_OPTION
